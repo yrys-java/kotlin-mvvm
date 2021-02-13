@@ -17,6 +17,7 @@ abstract class ArticleDatabase : RoomDatabase() {
 
     abstract fun getArticleDao(): ArticleDAO
 
+    // тут использую паттерн сиглтон
     companion object {
         @Volatile
         private var instance: ArticleDatabase? = null

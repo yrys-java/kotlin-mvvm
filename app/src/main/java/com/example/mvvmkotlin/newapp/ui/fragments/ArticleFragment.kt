@@ -20,6 +20,8 @@ import kotlinx.android.synthetic.main.fragment_saved_news.*
 class ArticleFragment : Fragment(R.layout.fragment_article) {
 
     lateinit var viewModel: NewsViewModel
+
+    //nav host
     val args: ArticleFragmentArgs by navArgs()
 
     @RequiresApi(Build.VERSION_CODES.O)

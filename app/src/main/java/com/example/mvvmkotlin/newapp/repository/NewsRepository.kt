@@ -8,12 +8,14 @@ class NewsRepository(
     val db: ArticleDatabase
 ) {
 
+    //для ретрофит
     suspend fun getBreakingNews(countryCode: String, page: Int) =
         RetrofitInstance.api.getBreakingNews(countryCode, page)
 
     suspend fun searchNews(countryCode: String, page: Int) =
         RetrofitInstance.api.searchNews(countryCode, page)
 
+    //для базы данных
     suspend fun insert(article: Article) = db.getArticleDao().insert(article)
 
     fun getSavingNews() = db.getArticleDao().getAllArticles()

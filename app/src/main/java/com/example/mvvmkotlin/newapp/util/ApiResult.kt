@@ -1,5 +1,7 @@
 package com.example.mvvmkotlin.newapp.util
 
+
+//for return Api result )))
 sealed class ApiResult<T>(
     val data: T? = null,
     val message: String? = null

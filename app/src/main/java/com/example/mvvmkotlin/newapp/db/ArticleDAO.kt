@@ -10,6 +10,7 @@ interface ArticleDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(article: Article): Long
 
+    //сортировка по возрастанию
     @Query("SELECT * FROM articles ORDER BY id DESC")
     fun getAllArticles(): LiveData<List<Article>>
 

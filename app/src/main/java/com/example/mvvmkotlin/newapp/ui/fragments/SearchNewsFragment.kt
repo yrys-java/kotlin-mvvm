@@ -41,19 +41,23 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
             )
         }
 
+        //поиск //так как мы не можем запустить корутины где попало
         var job: Job? = null
         etSearch.addTextChangedListener {
             job?.cancel()
+            //нужно ссоздать job и лаунчануть
             job = MainScope().launch {
                 delay(500L)
                 it?.let {
                    if (it.toString().isNotEmpty()) {
+                       // вызов корутинной функции
                        viewModel.searchNews(it.toString())
                    }
                 }
             }
         }
 
+        //наблюдатель Live Data
         viewModel.searchNews.observe(viewLifecycleOwner, Observer { responce ->
             when (responce) {
                 is ApiResult.Success -> {

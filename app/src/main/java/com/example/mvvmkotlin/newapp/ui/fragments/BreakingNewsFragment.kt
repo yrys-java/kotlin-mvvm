@@ -23,6 +23,9 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //реализация сигл активити
+        // мы не создаем каждый раз наблюдатели для каждого фрагмента
         viewModel = (activity as MainActivity).viewModel
         setupRecyclerView()
 
@@ -37,6 +40,8 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
             )
         }
 
+        //здесь не идет запрос
+        //это просто наблюдатель изменений в Live Data
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer {response ->
             when(response) {
                 is ApiResult.Success -> {

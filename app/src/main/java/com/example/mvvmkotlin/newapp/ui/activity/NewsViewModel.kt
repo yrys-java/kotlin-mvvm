@@ -23,9 +23,12 @@ class NewsViewModel(
     val newsRepository: NewsRepository
 ) : AndroidViewModel(app) {
 
+    //для домашней страницы
     val breakingNews: MutableLiveData<ApiResult<NewsResponse>> = MutableLiveData()
     var breakingNewsPage = 1
 
+
+    //для страницы поиска
     val searchNews: MutableLiveData<ApiResult<NewsResponse>> = MutableLiveData()
     var searchNewsPage = 1
 
@@ -73,6 +76,7 @@ class NewsViewModel(
         }
     }
 
+    //обработчик запросов: возращает результат загрузки Api
     private fun handleResponses(response: Response<NewsResponse>): ApiResult<NewsResponse> {
         if (response.isSuccessful) {
             response.body()?.let { result ->
@@ -82,6 +86,7 @@ class NewsViewModel(
         return ApiResult.Error(response.message())
     }
 
+    // дальше три метода для базы данных
     fun getSavingNews() = newsRepository.getSavingNews()
 
     fun deleteArticle(article: Article) = viewModelScope.launch {
@@ -92,6 +97,7 @@ class NewsViewModel(
         newsRepository.insert(article)
     }
 
+    //проверка интернет подключения: использую application context
     fun hasInternetConnections(): Boolean {
         val connectivityManager = getApplication<NewsApplication>().getSystemService(
             Context.CONNECTIVITY_SERVICE
